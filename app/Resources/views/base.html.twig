@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Bootsrap et Symfony2{% endblock %}</title>
+ 
+        {# ... #}
+ 
+        {% block stylesheets %}
+        {% stylesheets
+            '%kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less'
+            '%kernel.root_dir%/../vendor/twitter/bootstrap/less/responsive.less'
+            'bundles/acmetwig/css/acme-bootstrap.css'
+            filter='lessphp,cssrewrite?yui_css'
+            output='css/compiled/main.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}  
+        {% endblock %}
+ 
+        {# ... #}
+ 
+    </head>
+    <body>
+ 
+        {# ... #}
+ 
+        <div class="container">
+        {% block body %}{% endblock %}
+        </div>
+ 
+        {% block javascripts %}
+        {% javascripts
+            '../vendor/jquery/jquery/jquery-1.11.1.min.js'
+            '../vendor/twitter/bootstrap/js/bootstrap-dropdown.js'
+            filter='?yui_js'
+            output='js/compiled/main.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% endblock %}
+ 
+        <script type="text/javascript">
+            $(document).ready(function() {
+                {% block document_ready %}{% endblock %}
+            });
+        </script>
+    </body>
+</html>
